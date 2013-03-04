@@ -100,7 +100,7 @@ def walk(path):
                             dirskip = True
                             break
                 # recursively scan all subfolders
-                if not dirskip:
+                if not dirskip and not item.startswith('.'):
                     images += walk(os.path.join(folder,item,'')) # make sure paths end with a slash
         else:
             log('folder does not exist')
