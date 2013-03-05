@@ -85,8 +85,8 @@
 				</control>
 			</control>
 			<control type="label" id="99">
-				<posx>1250</posx>
-				<posy>640</posy>
+				<posx>1880</posx>
+				<posy>960</posy>
 				<width>400</width>
 				<height>20</height>
 				<font>font16</font>
@@ -95,8 +95,8 @@
 				<shadowcolor>F0000000</shadowcolor>
 			</control>
 			<control type="label" id="100">
-				<posx>1250</posx>
-				<posy>680</posy>
+				<posx>1880</posx>
+				<posy>1000</posy>
 				<width>400</width>
 				<height>20</height>
 				<font>font12</font>
