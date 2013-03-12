@@ -31,8 +31,8 @@ SKINDIR  = xbmc.getSkinDir().decode('utf-8')
 EXIF_TYPES  = ('.jpg', '.jpeg', '.tif', '.tiff')
 
 # random effect list to choose from
-    EFFECTLIST = ["('conditional', 'effect=zoom start=100 end=%i center=%i,%i time=%i condition=true'),",
-                 "('conditional', 'effect=zoom start=%i end=100 center=%i,%i time=%i condition=true'),"]
+EFFECTLIST = ["('conditional', 'effect=slide start=%i,%i end=0,0 time=%i condition=true'), ('conditional', 'effect=zoom start=100 end=%i center=0,0 time=%i condition=true'),",
+                 "('conditional', 'effect=slide start=0,0 end=%i,%i time=%i condition=true'), ('conditional', 'effect=zoom start=%i end=100 center=0,0 time=%i condition=true'),"]
 
 # get local dateformat to localize the exif date tag
 DATEFORMAT = xbmc.getRegion('dateshort')
@@ -354,17 +354,26 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         return images
 
     def _anim(self, cur_img):
+        w_width = self.winid.getWidth()
+        w_height = self.winid.getHeight()
         # reset position the current image
-        cur_img.setPosition(0, 0)
         # pick random animation settings
-        zoom = 130
-        posx = random.randint(0, cur_img.getWidth() - 1)
-        posy = random.randint(0, cur_img.getHeight() - 1)
+        zoom = 80
+
+        img_width = w_width * 100 / zoom
+        img_height = w_height * 100 / zoom
+        posx = random.randint(0, img_width - w_width - 1)
+        posy = random.randint(0, img_height - w_height - 1)
+
+        cur_img.setWidth(img_width)
+        cur_img.setHeight(img_height)
+        cur_img.setPosition(0, 0)
+
         # add 1 sec fadeout time to showtime
         anim_time = self.slideshow_time + 1
         # add the animation to the current image
         number = random.randint(0, 1)
-        cur_img.setAnimations(eval(EFFECTLIST[number] % (zoom, posx, posy, anim_time * 1400)))
+        cur_img.setAnimations(eval(EFFECTLIST[number] % (-posx, -posy, anim_time * 1250, zoom, anim_time * 1250)))
 
     def _get_animspeed(self):
         # find the skindir
