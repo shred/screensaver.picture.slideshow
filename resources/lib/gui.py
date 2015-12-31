@@ -358,7 +358,7 @@ class Screensaver(xbmcgui.WindowXMLDialog):
         w_height = self.winid.getHeight()
         # reset position the current image
         # pick random animation settings
-        zoom = 80
+        zoom = 87
 
         img_width = w_width * 100 / zoom
         img_height = w_height * 100 / zoom
